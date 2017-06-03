@@ -33,7 +33,7 @@ require([
 
       map.on('click', function(e) {
         var mapPoint = e.mapPoint,
-            symbolSize = 24,
+            symbolSize = 16,
             lineColor = new Color([255, 0, 0]),
             fillColor = new Color([255, 255, 0, 0.75]),
             line = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
