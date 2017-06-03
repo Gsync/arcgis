@@ -35,7 +35,6 @@
 
     //set the source's searchExtent to the extent specified above
       search.sources[0].searchExtent = extent;
-
     //don't forget to start the widget
     search.startup();
 });

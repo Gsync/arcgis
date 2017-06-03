@@ -14,20 +14,38 @@
 //create arcgis online map
 require([
   "esri/map",
-  "esri/arcgis/utils",
-  "esri/dijit/Legend",
-  "dojo/domReady!"
-  ], function(Map, arcgisUtils, Legend){
-      arcgisUtils.createMap("1a40fa5cc1ab4569b79f45444d728067", "mapDiv").then(function (response) {
-        map = response.map;
-
-        var legend = new Legend({
-          map: map,
-          layerInfos:(arcgisUtils.getLegendLayers(response))
-        }, "legendDiv");
-      legend.startup();
+  "esri/symbols/SimpleMarkerSymbol",
+  "esri/symbols/SimpleLineSymbol",
+  "esri/graphic",
+  "dojo/_base/Color"
+], function(
+  Map,
+  SimpleMarkerSymbol,
+  SimpleLineSymbol,
+  Graphic,
+  Color
+) {
+  var map = new Map('map', {
+        basemap: 'streets',
+        center: [-113.9508228, 51.1202633],
+        zoom: 14
       });
+
+      map.on('click', function(e) {
+        var mapPoint = e.mapPoint,
+            symbolSize = 24,
+            lineColor = new Color([255, 0, 0]),
+            fillColor = new Color([255, 255, 0, 0.75]),
+            line = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                lineColor, 3),
+            sms = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE,
+                symbolSize, line, fillColor),
+            graphic = new Graphic(mapPoint, sms);
+        map.graphics.add(graphic);
     });
+
+});
+
 
 // arcgisUtils.createMap("1a40fa5cc1ab4569b79f45444d728067", "mapDiv").then(function (response) {
 //   map = response.map;
